@@ -1,8 +1,5 @@
 package builderPattern
 
-import org.assertj.core.api.Assertions
-import org.junit.Test
-
 /**
  * Used when wwe have have multiple parameters to initialize.
  * Kotlin solves this problem with named parameters
@@ -34,26 +31,5 @@ class Component private constructor(builder:Builder){
         param1 = builder.getParam1()
         param2 = builder.getParam2()
         param3 = builder.getParam3()
-    }
-}
-
-class ComponentTest{
-
-    @Test
-    fun builderTest(){
-
-
-        val component = Component.Builder()
-            .setParam1("Some value")
-            .setParam2(2)
-            .build()
-
-        println(component)
-        println(component.param1)
-        println(component.param2)
-        println(component.param3)
-        Assertions.assertThat(component.param1).isEqualTo("Some value")
-        Assertions.assertThat(component.param2).isEqualTo(2)
-        Assertions.assertThat(component.param3).isEqualTo(null)
     }
 }
