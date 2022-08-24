@@ -10,7 +10,7 @@ class ComponentTest{
     fun builderTest(){
         val component = Component.Builder()
             .setParam1("Some value")
-            .setParam2(2)
+//            .setParam2(2)
             .build()
 
         println(component)
