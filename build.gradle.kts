@@ -18,7 +18,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     testImplementation(kotlin("test"))
     // Coroutines
-
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+")
 }
 
 tasks.test {
