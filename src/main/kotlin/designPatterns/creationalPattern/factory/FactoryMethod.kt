@@ -62,14 +62,14 @@ enum class HostingPackageType {
 // 3
 class StandardHostingPackage : HostingPackageInterface {
     override fun getServices(): List<String> {
-        return listOf("StandardHostingPackage")
+        return listOf("Shared hosting", "Cloud hosting", "Dedicated server hosting")
     }
 }
 
 // 4
 class PremiumHostingPackage : HostingPackageInterface {
     override fun getServices(): List<String> {
-        return listOf("PremiumHostingPackage")
+        return listOf("High-performance hosting","Enterprise-level hosting")
     }
 }
 
@@ -105,25 +105,24 @@ class HostingPackageTest {
 
 
 interface Animal {
-    val id: Int
     val name: String
 }
 
-class Cat(override val id: Int) : Animal {
+class Cat : Animal {
     override val name = "Cat"
 }
 
-class Dog(override val id: Int) : Animal {
+class Dog : Animal {
     override val name = "Dog"
 }
 
 class AnimalFactory {
-    var counter = 0
+
     fun createAnimal(animalType: String): Animal {
 
         return when (animalType.trim().toLowerCase()) {
-            "cat" -> Cat(counter++)
-            "dog" -> Dog(++counter)
+            "cat" -> Cat()
+            "dog" -> Dog()
             else -> throw RuntimeException("Unknown animal $animalType")
         }
     }
@@ -142,7 +141,7 @@ class AnimalFactoryTest {
 
         //then
         Assert.assertEquals(animal.name, "Dog")
-        Assert.assertEquals(animal.id, 1)
+        Assert.assertEquals(animal.javaClass, Dog::class.java)
     }
 }
 

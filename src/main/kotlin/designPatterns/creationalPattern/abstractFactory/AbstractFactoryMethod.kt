@@ -17,10 +17,21 @@ import org.junit.Test
  * Allows for testability
  * */
 
-interface DataSource
+interface DataSource{
+    fun getData():List<String>
+}
 
-class DatabaseDataSource : DataSource
-class NetworkDataSource : DataSource
+class DatabaseDataSource : DataSource {
+    override fun getData(): List<String> {
+        return listOf("Motherboard","CPU")
+    }
+}
+
+class NetworkDataSource : DataSource {
+    override fun getData(): List<String> {
+        return listOf("Graphical card","RAM")
+    }
+}
 
 abstract class DataSourceFactory {
 
@@ -89,15 +100,33 @@ class MacOSFactory : GUIFactory {
 
 class Application(private val factory: GUIFactory) {
     private var button: Button? = null
-    fun createUI() {
+    fun createUI(): Button? {
         button = factory.createButton()
+        return button
     }
 
     fun paint() {
-        button!!.paint()
+        button?.paint()
     }
 }
 
+val ex by lazy {
+    println("Abc")
+    "BMW"
+}
+
+class ButtonFactoryTest{
+    @Test
+    fun buttonFactoryTest(){
+        //given
+        val factory: GUIFactory = MacOSFactory()
+        // when
+        val app = Application(factory).createUI()
+
+        //then
+        Assertions.assertThat(app).isInstanceOf(MacOSButton::class.java)
+    }
+}
 object Client {
     @JvmStatic
     fun main(args: Array<String>) {
@@ -109,6 +138,13 @@ object Client {
         app = Application(factory)
         app.createUI()
         app.paint()
+        println(ex)
+        println(ex)
+        println(ex)
+        println(ex)
+        println(ex)
+        println(ex)
+
     }
 }
 
@@ -204,5 +240,6 @@ val units = listOf(
     vehicleFactory1.build(VehicleUnits.APC),
     vehicleFactory1.build(VehicleUnits.APC)
 )
+
 
 
